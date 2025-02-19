@@ -17,6 +17,9 @@ import AILogoStylesScreen from './screens/AILogoStylesScreen';
 import AITattooScreen from './screens/AITattooScreen';
 import AITattooCreateScreen from './screens/AITattooCreateScreen';
 import AITattooStylesScreen from './screens/AITattooStylesScreen';
+import AISignatureScreen from './screens/AISignatureScreen';
+import AISignatureCreateScreen from './screens/AISignatureCreateScreen';
+import AISignatureStylesScreen from './screens/AISignatureStylesScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +42,9 @@ export default function App() {
           <Stack.Screen name="AITattoo" component={AITattooScreen} />
           <Stack.Screen name="AITattooCreate" component={AITattooCreateScreen} />
           <Stack.Screen name="AITattooStyles" component={AITattooStylesScreen} />
+          <Stack.Screen name="AISignature" component={AISignatureScreen} />
+          <Stack.Screen name="AISignatureCreate" component={AISignatureCreateScreen} />
+          <Stack.Screen name="AISignatureStyles" component={AISignatureStylesScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

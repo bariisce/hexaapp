@@ -41,7 +41,7 @@ export interface TattooStyle {
 }
 
 // İmza İstekleri için Interface
-/*export interface SignatureRequest {
+export interface SignatureRequest {
   id?: string;
   prompt: string;
   selectedStyle: string;
@@ -58,7 +58,7 @@ export interface SignatureStyle {
   imageUrl: string;
   description: string;
   category: string;
-}*/
+}
 
 // Logo Stilleri İşlemleri
 export const logoStylesService = {
@@ -167,7 +167,7 @@ export const tattooRequestsService = {
 };
 
 // İmza Stilleri İşlemleri
-/*export const signatureStylesService = {
+export const signatureStylesService = {
   // Tüm stilleri getir
   getAllStyles: async (): Promise<SignatureStyle[]> => {
     const querySnapshot = await getDocs(collection(db, 'signatureStyles'));
@@ -185,10 +185,10 @@ export const tattooRequestsService = {
     });
     return docRef.id;
   },
-};*/
+};
 
 // İmza İstekleri İşlemleri
-/*export const signatureRequestsService = {
+export const signatureRequestsService = {
   // Yeni istek oluştur
   createRequest: async (request: Omit<SignatureRequest, 'id' | 'createdAt' | 'status'>): Promise<string> => {
     const docRef = await addDoc(collection(db, 'signatureRequests'), {
@@ -217,4 +217,4 @@ export const tattooRequestsService = {
       ...doc.data()
     })) as SignatureRequest[];
   },
-}; */
+};
