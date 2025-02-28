@@ -58,7 +58,8 @@ const HomeScreen = () => {
       title: 'Stunning Art',
       subtitle: 'AI Art',
       color: '#800080',
-      gradientColors: ['#BA55D3', '#800080'] as [string, string]
+      gradientColors: ['#BA55D3', '#800080'] as [string, string],
+      onPress: () => navigation.navigate('AIArt')
     },
     {
       title: 'Transform Room',

@@ -12,4 +12,7 @@ export type RootStackParamList = {
   AISignature: undefined;
   AISignatureCreate: undefined;
   AISignatureStyles: undefined;
+  AIArt: undefined;
+  AIArtCreate: undefined;
+  AIArtStyles: undefined;
 }; 

@@ -60,6 +60,25 @@ export interface SignatureStyle {
   category: string;
 }
 
+export interface ArtRequest {
+  id?: string;
+  prompt: string;
+  selectedStyle: string;
+  type: 'text' | 'image';
+  status: 'pending' | 'completed';
+  createdAt: number;
+  result?: string;
+}
+
+// İmza Stilleri için Interface
+export interface ArtStyle {
+  id: string;
+  name: string;
+  imageUrl: string;
+  description: string;
+  category: string;
+}
+
 // Logo Stilleri İşlemleri
 export const logoStylesService = {
   // Tüm stilleri getir
@@ -216,5 +235,58 @@ export const signatureRequestsService = {
       id: doc.id,
       ...doc.data()
     })) as SignatureRequest[];
+  },
+};
+
+// Art Stilleri İşlemleri
+export const artStylesService = {
+  // Tüm stilleri getir
+  getAllStyles: async (): Promise<ArtStyle[]> => {
+    const querySnapshot = await getDocs(collection(db, 'artStyles'));
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as ArtStyle));
+  },
+
+  // Yeni stil ekle
+  addStyle: async (style: Omit<ArtStyle, 'id'>): Promise<string> => {
+    const docRef = await addDoc(collection(db, 'artStyles'), {
+      ...style,
+      createdAt: new Date()
+    });
+    return docRef.id;
+  },
+};
+
+// İmza İstekleri İşlemleri
+export const artRequestsService = {
+  // Yeni istek oluştur
+  createRequest: async (request: Omit<ArtRequest, 'id' | 'createdAt' | 'status'>): Promise<string> => {
+    const docRef = await addDoc(collection(db, 'artRequests'), {
+      ...request,
+      status: 'pending',
+      createdAt: Date.now()
+    });
+    return docRef.id;
+  },
+
+  // İstek durumunu güncelle
+  updateRequestStatus: async (requestId: string, status: 'completed', result: string) => {
+    const requestRef = doc(db, 'artRequests', requestId);
+    await updateDoc(requestRef, {
+      status,
+      result,
+      updatedAt: Date.now()
+    });
+  },
+
+  // Kullanıcının isteklerini getir
+  getUserRequests: async (): Promise<ArtRequest[]> => {
+    const querySnapshot = await getDocs(collection(db, 'artRequests'));
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    })) as ArtRequest[];
   },
 };

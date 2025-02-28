@@ -61,7 +61,6 @@ const signatureStyles = [
     description: 'Underline designs that blend with human anatomy.',
     category: 'Underline',
   },
-  
 ];
 
 const seedSignatureStyles = async () => {
