@@ -23,6 +23,9 @@ import AISignatureStylesScreen from './src/screens/AISignatureStylesScreen';
 import AIArtScreen from './src/screens/AIArtScreen';
 import AIArtCreateScreen from './src/screens/AIArtCreateScreen';
 import AIArtStylesScreen from './src/screens/AIArtStylesScreen';
+import AIRoomScreen from './src/screens/AIRoomScreen';
+import AIRoomCreateScreen from './src/screens/AIRoomCreateScreen';
+import AIRoomStylesScreen from './src/screens/AIRoomStylesScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +54,9 @@ export default function App() {
           <Stack.Screen name="AIArt" component={AIArtScreen} />
           <Stack.Screen name="AIArtCreate" component={AIArtCreateScreen} />
           <Stack.Screen name="AIArtStyles" component={AIArtStylesScreen} />
+          <Stack.Screen name="AIRoom" component={AIRoomScreen} />
+          <Stack.Screen name="AIRoomCreate" component={AIRoomCreateScreen} />
+          <Stack.Screen name="AIRoomStyles" component={AIRoomStylesScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

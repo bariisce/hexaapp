@@ -65,7 +65,8 @@ const HomeScreen = () => {
       title: 'Transform Room',
       subtitle: 'AI Room Design',
       color: '#006400',
-      gradientColors: ['#3CB371', '#006400'] as [string, string]
+      gradientColors: ['#3CB371', '#006400'] as [string, string],
+      onPress: () => navigation.navigate('AIRoom')
     },
     {
       title: 'Your Wallpaper',

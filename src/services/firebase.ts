@@ -79,6 +79,25 @@ export interface ArtStyle {
   category: string;
 }
 
+export interface RoomRequest {
+  id?: string;
+  prompt: string;
+  selectedStyle: string;
+  type: 'text' | 'image';
+  status: 'pending' | 'completed';
+  createdAt: number;
+  result?: string;
+}
+
+// İmza Stilleri için Interface
+export interface RoomStyle {
+  id: string;
+  name: string;
+  imageUrl: string;
+  description: string;
+  category: string;
+}
+
 // Logo Stilleri İşlemleri
 export const logoStylesService = {
   // Tüm stilleri getir
@@ -259,7 +278,7 @@ export const artStylesService = {
   },
 };
 
-// İmza İstekleri İşlemleri
+// Art İstekleri İşlemleri
 export const artRequestsService = {
   // Yeni istek oluştur
   createRequest: async (request: Omit<ArtRequest, 'id' | 'createdAt' | 'status'>): Promise<string> => {
@@ -288,5 +307,58 @@ export const artRequestsService = {
       id: doc.id,
       ...doc.data()
     })) as ArtRequest[];
+  },
+};
+
+// Oda Stilleri İşlemleri
+export const roomStylesService = {
+  // Tüm stilleri getir
+  getAllStyles: async (): Promise<RoomStyle[]> => {
+    const querySnapshot = await getDocs(collection(db, 'roomStyles'));
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as RoomStyle));
+  },
+
+  // Yeni stil ekle
+  addStyle: async (style: Omit<RoomStyle, 'id'>): Promise<string> => {
+    const docRef = await addDoc(collection(db, 'roomStyles'), {
+      ...style,
+      createdAt: new Date()
+    });
+    return docRef.id;
+  },
+};
+
+// Oda İstekleri İşlemleri
+export const roomRequestsService = {
+  // Yeni istek oluştur
+  createRequest: async (request: Omit<RoomRequest, 'id' | 'createdAt' | 'status'>): Promise<string> => {
+    const docRef = await addDoc(collection(db, 'roomRequests'), {
+      ...request,
+      status: 'pending',
+      createdAt: Date.now()
+    });
+    return docRef.id;
+  },
+
+  // İstek durumunu güncelle
+  updateRequestStatus: async (requestId: string, status: 'completed', result: string) => {
+    const requestRef = doc(db, 'roomRequests', requestId);
+    await updateDoc(requestRef, {
+      status,
+      result,
+      updatedAt: Date.now()
+    });
+  },
+
+  // Kullanıcının isteklerini getir
+  getUserRequests: async (): Promise<RoomRequest[]> => {
+    const querySnapshot = await getDocs(collection(db, 'roomRequests'));
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    })) as RoomRequest[];
   },
 };
