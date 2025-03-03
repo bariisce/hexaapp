@@ -70,7 +70,7 @@ export interface ArtRequest {
   result?: string;
 }
 
-// İmza Stilleri için Interface
+// Art Stilleri için Interface
 export interface ArtStyle {
   id: string;
   name: string;
@@ -89,7 +89,7 @@ export interface RoomRequest {
   result?: string;
 }
 
-// İmza Stilleri için Interface
+// Oda Stilleri için Interface
 export interface RoomStyle {
   id: string;
   name: string;
@@ -108,7 +108,7 @@ export interface WallpaperRequest {
   result?: string;
 }
 
-// İmza Stilleri için Interface
+// Wallpaper Stilleri için Interface
 export interface WallpaperStyle {
   id: string;
   name: string;
@@ -127,8 +127,27 @@ export interface GarmentRequest {
   result?: string;
 }
 
-// İmza Stilleri için Interface
+// Giysi Stilleri için Interface
 export interface GarmentStyle {
+  id: string;
+  name: string;
+  imageUrl: string;
+  description: string;
+  category: string;
+}
+
+export interface EmojiRequest {
+  id?: string;
+  prompt: string;
+  selectedStyle: string;
+  type: 'text' | 'image';
+  status: 'pending' | 'completed';
+  createdAt: number;
+  result?: string;
+}
+
+// Emoji Stilleri için Interface
+export interface EmojiStyle {
   id: string;
   name: string;
   imageUrl: string;
@@ -504,5 +523,58 @@ export const garmentRequestsService = {
       id: doc.id,
       ...doc.data()
     })) as GarmentRequest[];
+  },
+};
+
+// Emoji Stilleri İşlemleri
+export const emojiStylesService = {
+  // Tüm stilleri getir
+  getAllStyles: async (): Promise<EmojiStyle[]> => {
+    const querySnapshot = await getDocs(collection(db, 'emojiStyles'));
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as EmojiStyle));
+  },
+
+  // Yeni stil ekle
+  addStyle: async (style: Omit<EmojiStyle, 'id'>): Promise<string> => {
+    const docRef = await addDoc(collection(db, 'emojiStyles'), {
+      ...style,
+      createdAt: new Date()
+    });
+    return docRef.id;
+  },
+};
+
+// Emoji İstekleri İşlemleri
+export const emojiRequestsService = {
+  // Yeni istek oluştur
+  createRequest: async (request: Omit<EmojiRequest, 'id' | 'createdAt' | 'status'>): Promise<string> => {
+    const docRef = await addDoc(collection(db, 'emojiRequests'), {
+      ...request,
+      status: 'pending',
+      createdAt: Date.now()
+    });
+    return docRef.id;
+  },
+
+  // İstek durumunu güncelle
+  updateRequestStatus: async (requestId: string, status: 'completed', result: string) => {
+    const requestRef = doc(db, 'emojiRequests', requestId);
+    await updateDoc(requestRef, {
+      status,
+      result,
+      updatedAt: Date.now()
+    });
+  },
+
+  // Kullanıcının isteklerini getir
+  getUserRequests: async (): Promise<EmojiRequest[]> => {
+    const querySnapshot = await getDocs(collection(db, 'emojiRequests'));
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    })) as EmojiRequest[];
   },
 };

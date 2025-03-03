@@ -32,6 +32,9 @@ import AIWallpaperStylesScreen from './screens/AIWallpaperStylesScreen';
 import AIGarmentScreen from './screens/AIGarmentScreen';
 import AIGarmentCreateScreen from './screens/AIGarmentCreateScreen';
 import AIGarmentStylesScreen from './screens/AIGarmentStylesScreen';
+import AIEmojiScreen from './screens/AIEmojiScreen';
+import AIEmojiCreateScreen from './screens/AIEmojiCreateScreen';
+import AIEmojiStylesScreen from './screens/AIEmojiStylesScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -69,6 +72,9 @@ export default function App() {
           <Stack.Screen name="AIGarment" component={AIGarmentScreen} />
           <Stack.Screen name="AIGarmentCreate" component={AIGarmentCreateScreen} />
           <Stack.Screen name="AIGarmentStyles" component={AIGarmentStylesScreen} />
+          <Stack.Screen name="AIEmoji" component={AIEmojiScreen} />
+          <Stack.Screen name="AIEmojiCreate" component={AIEmojiCreateScreen} />
+          <Stack.Screen name="AIEmojiStyles" component={AIEmojiStylesScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

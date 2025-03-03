@@ -86,7 +86,8 @@ const HomeScreen = () => {
       title: 'Your Emoji',
       subtitle: 'AI Emoji',
       color: '#FF8C00',
-      gradientColors: ['#FFA500', '#FF8C00'] as [string, string]
+      gradientColors: ['#FFA500', '#FF8C00'] as [string, string],
+      onPress: () => navigation.navigate('AIEmoji')
     },
     {
       title: 'Your Mockup',

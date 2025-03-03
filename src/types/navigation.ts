@@ -24,4 +24,7 @@ export type RootStackParamList = {
   AIGarment: undefined;
   AIGarmentCreate: undefined;
   AIGarmentStyles: undefined;
+  AIEmoji: undefined;
+  AIEmojiCreate: undefined;
+  AIEmojiStyles: undefined;
 }; 

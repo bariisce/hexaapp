@@ -340,3 +340,45 @@ export const garmentStyleCardStyles = StyleSheet.create({
     textShadowRadius: 2,
   },
 });
+
+export const emojiStyleCardStyles = StyleSheet.create({
+  card: {
+    alignItems: 'center',
+    width: '100%',
+  },
+  imageContainer: {
+    width: '100%',
+    aspectRatio: 1,
+    borderRadius: 16,
+    backgroundColor: COLORS.surface,
+    marginBottom: SPACING.xs,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+  },
+  loadingContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.surface,
+  },
+  name: {
+    color: COLORS.text,
+    fontSize: 12,
+    fontWeight: '600',
+    textAlign: 'center',
+    width: '100%',
+    paddingHorizontal: SPACING.xs,
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
+  },
+});
