@@ -72,13 +72,15 @@ const HomeScreen = () => {
       title: 'Your Wallpaper',
       subtitle: 'AI Wallpaper',
       color: '#8B0000',
-      gradientColors: ['#DC143C', '#8B0000'] as [string, string]
+      gradientColors: ['#DC143C', '#8B0000'] as [string, string],
+      onPress: () => navigation.navigate('AIWallpaper')
     },
     {
       title: 'Your Clothes',
       subtitle: 'AI Garment',
       color: '#4169E1',
-      gradientColors: ['#1E90FF', '#4169E1'] as [string, string]
+      gradientColors: ['#1E90FF', '#4169E1'] as [string, string],
+      onPress: () => navigation.navigate('AIGarment')
     },
     {
       title: 'Your Emoji',

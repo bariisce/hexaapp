@@ -98,6 +98,44 @@ export interface RoomStyle {
   category: string;
 }
 
+export interface WallpaperRequest {
+  id?: string;
+  prompt: string;
+  selectedStyle: string;
+  type: 'text' | 'image';
+  status: 'pending' | 'completed';
+  createdAt: number;
+  result?: string;
+}
+
+// İmza Stilleri için Interface
+export interface WallpaperStyle {
+  id: string;
+  name: string;
+  imageUrl: string;
+  description: string;
+  category: string;
+}
+
+export interface GarmentRequest {
+  id?: string;
+  prompt: string;
+  selectedStyle: string;
+  type: 'text' | 'image';
+  status: 'pending' | 'completed';
+  createdAt: number;
+  result?: string;
+}
+
+// İmza Stilleri için Interface
+export interface GarmentStyle {
+  id: string;
+  name: string;
+  imageUrl: string;
+  description: string;
+  category: string;
+}
+
 // Logo Stilleri İşlemleri
 export const logoStylesService = {
   // Tüm stilleri getir
@@ -360,5 +398,111 @@ export const roomRequestsService = {
       id: doc.id,
       ...doc.data()
     })) as RoomRequest[];
+  },
+};
+
+// Wallpaper Stilleri İşlemleri
+export const wallpaperStylesService = {
+  // Tüm stilleri getir
+  getAllStyles: async (): Promise<WallpaperStyle[]> => {
+    const querySnapshot = await getDocs(collection(db, 'wallpaperStyles'));
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as WallpaperStyle));
+  },
+
+  // Yeni stil ekle
+  addStyle: async (style: Omit<WallpaperStyle, 'id'>): Promise<string> => {
+    const docRef = await addDoc(collection(db, 'wallpaperStyles'), {
+      ...style,
+      createdAt: new Date()
+    });
+    return docRef.id;
+  },
+};
+
+// Wallpaper İstekleri İşlemleri
+export const wallpaperRequestsService = {
+  // Yeni istek oluştur
+  createRequest: async (request: Omit<WallpaperRequest, 'id' | 'createdAt' | 'status'>): Promise<string> => {
+    const docRef = await addDoc(collection(db, 'wallpaperRequests'), {
+      ...request,
+      status: 'pending',
+      createdAt: Date.now()
+    });
+    return docRef.id;
+  },
+
+  // İstek durumunu güncelle
+  updateRequestStatus: async (requestId: string, status: 'completed', result: string) => {
+    const requestRef = doc(db, 'wallpaperRequests', requestId);
+    await updateDoc(requestRef, {
+      status,
+      result,
+      updatedAt: Date.now()
+    });
+  },
+
+  // Kullanıcının isteklerini getir
+  getUserRequests: async (): Promise<WallpaperRequest[]> => {
+    const querySnapshot = await getDocs(collection(db, 'wallpaperRequests'));
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    })) as WallpaperRequest[];
+  },
+};
+
+// Garment Stilleri İşlemleri
+export const garmentStylesService = {
+  // Tüm stilleri getir
+  getAllStyles: async (): Promise<GarmentStyle[]> => {
+    const querySnapshot = await getDocs(collection(db, 'garmentStyles'));
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as GarmentStyle));
+  },
+
+  // Yeni stil ekle
+  addStyle: async (style: Omit<GarmentStyle, 'id'>): Promise<string> => {
+    const docRef = await addDoc(collection(db, 'garmentStyles'), {
+      ...style,
+      createdAt: new Date()
+    });
+    return docRef.id;
+  },
+};
+
+// garment İstekleri İşlemleri
+export const garmentRequestsService = {
+  // Yeni istek oluştur
+  createRequest: async (request: Omit<GarmentRequest, 'id' | 'createdAt' | 'status'>): Promise<string> => {
+    const docRef = await addDoc(collection(db, 'garmentRequests'), {
+      ...request,
+      status: 'pending',
+      createdAt: Date.now()
+    });
+    return docRef.id;
+  },
+
+  // İstek durumunu güncelle
+  updateRequestStatus: async (requestId: string, status: 'completed', result: string) => {
+    const requestRef = doc(db, 'garmentRequests', requestId);
+    await updateDoc(requestRef, {
+      status,
+      result,
+      updatedAt: Date.now()
+    });
+  },
+
+  // Kullanıcının isteklerini getir
+  getUserRequests: async (): Promise<GarmentRequest[]> => {
+    const querySnapshot = await getDocs(collection(db, 'garmentRequests'));
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    })) as GarmentRequest[];
   },
 };

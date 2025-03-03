@@ -26,6 +26,12 @@ import AIArtStylesScreen from './screens/AIArtStylesScreen';
 import AIRoomScreen from './screens/AIRoomScreen';
 import AIRoomCreateScreen from './screens/AIRoomCreateScreen';
 import AIRoomStylesScreen from './screens/AIRoomStylesScreen';
+import AIWallpaperScreen from './screens/AIWallpaperScreen';
+import AIWallpaperCreateScreen from './screens/AIWallpaperCreateScreen';
+import AIWallpaperStylesScreen from './screens/AIWallpaperStylesScreen';
+import AIGarmentScreen from './screens/AIGarmentScreen';
+import AIGarmentCreateScreen from './screens/AIGarmentCreateScreen';
+import AIGarmentStylesScreen from './screens/AIGarmentStylesScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -57,6 +63,12 @@ export default function App() {
           <Stack.Screen name="AIRoom" component={AIRoomScreen} />
           <Stack.Screen name="AIRoomCreate" component={AIRoomCreateScreen} />
           <Stack.Screen name="AIRoomStyles" component={AIRoomStylesScreen} />
+          <Stack.Screen name="AIWallpaper" component={AIWallpaperScreen} />
+          <Stack.Screen name="AIWallpaperCreate" component={AIWallpaperCreateScreen} />
+          <Stack.Screen name="AIWallpaperStyles" component={AIWallpaperStylesScreen} />
+          <Stack.Screen name="AIGarment" component={AIGarmentScreen} />
+          <Stack.Screen name="AIGarmentCreate" component={AIGarmentCreateScreen} />
+          <Stack.Screen name="AIGarmentStyles" component={AIGarmentStylesScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

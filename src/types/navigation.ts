@@ -18,4 +18,10 @@ export type RootStackParamList = {
   AIRoom: undefined;
   AIRoomCreate: undefined;
   AIRoomStyles: undefined;
+  AIWallpaper: undefined;
+  AIWallpaperCreate: undefined;
+  AIWallpaperStyles: undefined;
+  AIGarment: undefined;
+  AIGarmentCreate: undefined;
+  AIGarmentStyles: undefined;
 }; 
