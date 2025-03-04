@@ -19,7 +19,7 @@ const AIEmojiScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        colors={['#1a1a2e', '#8B4513', '#1a1a2e']}
+        colors={['#1a1a2e', '#FF8C00', '#1a1a2e']}
         style={styles.gradient}
         start={{ x: 0.5, y: 0 }}
         end={{ x: 0.5, y: 1 }}
@@ -50,7 +50,7 @@ const AIEmojiScreen = () => {
               onPress={() => navigation.navigate('AIEmojiCreate')}
             >
               <LinearGradient
-                colors={['#8B4513', '#CD853F']}
+                colors={['#FF8C00', '#FFA500']}
                 style={styles.buttonGradient}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}

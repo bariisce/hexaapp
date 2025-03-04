@@ -93,7 +93,8 @@ const HomeScreen = () => {
       title: 'Your Mockup',
       subtitle: 'AI Mockup',
       color: '#483D8B',
-      gradientColors: ['#6A5ACD', '#483D8B'] as [string, string]
+      gradientColors: ['#6A5ACD', '#483D8B'] as [string, string],
+      onPress: () => navigation.navigate('AIMockup')
     }
   ];
 

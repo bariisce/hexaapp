@@ -155,6 +155,25 @@ export interface EmojiStyle {
   category: string;
 }
 
+// Mockup Stilleri için Interface
+export interface MockupStyle {
+  id: string;
+  name: string;
+  imageUrl: string;
+  description: string;
+  category: string;
+}
+
+export interface MockupRequest {
+  id?: string;
+  prompt: string;
+  selectedStyle: string;
+  type: 'text' | 'image';
+  status: 'pending' | 'completed';
+  createdAt: number;
+  result?: string;
+}
+
 // Logo Stilleri İşlemleri
 export const logoStylesService = {
   // Tüm stilleri getir
@@ -576,5 +595,57 @@ export const emojiRequestsService = {
       id: doc.id,
       ...doc.data()
     })) as EmojiRequest[];
+  },
+};
+
+export const mockupStylesService = {
+  // Tüm stilleri getir
+  getAllStyles: async (): Promise<MockupStyle[]> => {
+    const querySnapshot = await getDocs(collection(db, 'mockupStyles'));
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as MockupStyle));
+  },
+
+  // Yeni stil ekle
+  addStyle: async (style: Omit<MockupStyle, 'id'>): Promise<string> => {
+    const docRef = await addDoc(collection(db, 'mockupStyles'), {
+      ...style,
+      createdAt: new Date()
+    });
+    return docRef.id;
+  },
+};
+
+// Mockup İstekleri İşlemleri
+export const mockupRequestsService = {
+  // Yeni istek oluştur
+  createRequest: async (request: Omit<MockupRequest, 'id' | 'createdAt' | 'status'>): Promise<string> => {
+    const docRef = await addDoc(collection(db, 'mockupRequests'), {
+      ...request,
+      status: 'pending',
+      createdAt: Date.now()
+    });
+    return docRef.id;
+  },
+
+  // İstek durumunu güncelle
+  updateRequestStatus: async (requestId: string, status: 'completed', result: string) => {
+    const requestRef = doc(db, 'mockupRequests', requestId);
+    await updateDoc(requestRef, {
+      status,
+      result,
+      updatedAt: Date.now()
+    });
+  },
+
+  // Kullanıcının isteklerini getir
+  getUserRequests: async (): Promise<MockupRequest[]> => {
+    const querySnapshot = await getDocs(collection(db, 'mockupRequests'));
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    })) as MockupRequest[];
   },
 };

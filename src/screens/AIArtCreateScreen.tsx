@@ -68,7 +68,7 @@ const AIArtCreateScreen = () => {
       <GradientButton
         title={isLoading ? "Creating..." : "Create"}
         icon="✨"
-        colors={['#8B4513', '#CD853F']}
+        colors={['#800080', '#BA55D3']}
         style={styles.createButton}
         onPress={handleCreateArt}
         disabled={isLoading || !prompt || !selectedStyle}

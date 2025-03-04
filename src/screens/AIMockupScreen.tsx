@@ -7,19 +7,19 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 type RootStackParamList = {
   Home: undefined;
-  AISignature: undefined;
-  AISignatureCreate: undefined;
+  AIMockup: undefined;
+  AIMockupCreate: undefined;
 };
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'AISignature'>;
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'AIMockup'>;
 
-const AISignatureScreen = () => {
+const AIMockupScreen = () => {
   const navigation = useNavigation<NavigationProp>();
 
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        colors={['#1a1a2e', '#5F9EA0', '#1a1a2e']}
+        colors={['#1a1a2e', '#483D8B', '#1a1a2e']}
         style={styles.gradient}
         start={{ x: 0.5, y: 0 }}
         end={{ x: 0.5, y: 1 }}
@@ -35,22 +35,22 @@ const AISignatureScreen = () => {
           <View style={styles.promptContainer}>
             <Text style={styles.promptLabel}>ENTER YOUR PROMPT</Text>
             <View style={styles.promptBox}>
-              <Text style={styles.promptExample}>A minimalist wolf signature design</Text>
+              <Text style={styles.promptExample}>A minimalist wolf mockup design</Text>
             </View>
           </View>
 
           <View style={styles.bottomContent}>
-            <Text style={styles.title}>AI Signature</Text>
+            <Text style={styles.title}>AI Mockup</Text>
             <Text style={styles.description}>
-              Transform your signature ideas into stunning designs. Describe your vision, select a style, and let Hexa create the perfect signature design that tells your unique story!
+              Transform your mockup ideas into stunning designs. Describe your vision, select a style, and let Hexa create the perfect mockup design that tells your unique story!
             </Text>
 
             <TouchableOpacity 
               style={styles.startButton}
-              onPress={() => navigation.navigate('AISignatureCreate')}
+              onPress={() => navigation.navigate('AIMockupCreate')}
             >
               <LinearGradient
-                colors={['#2F4F4F', '#5F9EA0']}
+                colors={['#483D8B', '#6A5ACD']}
                 style={styles.buttonGradient}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
@@ -153,4 +153,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AISignatureScreen; 
+export default AIMockupScreen; 

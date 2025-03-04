@@ -19,7 +19,7 @@ const AIWallpaperScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        colors={['#1a1a2e', '#8B4513', '#1a1a2e']}
+        colors={['#1a1a2e', '#8B0000', '#1a1a2e']}
         style={styles.gradient}
         start={{ x: 0.5, y: 0 }}
         end={{ x: 0.5, y: 1 }}
@@ -50,7 +50,7 @@ const AIWallpaperScreen = () => {
               onPress={() => navigation.navigate('AIWallpaperCreate')}
             >
               <LinearGradient
-                colors={['#8B4513', '#CD853F']}
+                colors={['#DC143C', '#8B0000']}
                 style={styles.buttonGradient}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}

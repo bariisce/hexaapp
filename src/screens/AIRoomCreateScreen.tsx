@@ -68,7 +68,7 @@ const AIRoomCreateScreen = () => {
       <GradientButton
         title={isLoading ? "Creating..." : "Create"}
         icon="✨"
-        colors={['#8B4513', '#CD853F']}
+        colors={['#006400', '#3CB371']}
         style={styles.createButton}
         onPress={handleCreateRoom}
         disabled={isLoading || !prompt || !selectedStyle}

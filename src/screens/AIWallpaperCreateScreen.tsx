@@ -68,10 +68,10 @@ const AIWallpaperCreateScreen = () => {
       <GradientButton
         title={isLoading ? "Creating..." : "Create"}
         icon="✨"
-        colors={['#8B4513', '#CD853F']}
+        colors={['#8B0000', '#DC143C']}
         style={styles.createButton}
         onPress={handleCreateWallpaper}
-        disabled={isLoading || !prompt || !selectedStyle}
+        disabled={isLoading}
       />
     </SafeAreaView>
   );

@@ -68,7 +68,7 @@ const AIEmojiCreateScreen = () => {
       <GradientButton
         title={isLoading ? "Creating..." : "Create"}
         icon="✨"
-        colors={['#8B4513', '#CD853F']}
+        colors={['#FF8C00', '#FFA500']}
         style={styles.createButton}
         onPress={handleCreateEmoji}
         disabled={isLoading || !prompt || !selectedStyle}

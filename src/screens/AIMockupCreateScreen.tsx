@@ -5,30 +5,30 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import Header from '../components/Header';
 import GradientButton from '../components/GradientButton';
-import { GarmentTypeSelector } from '../components/GarmentTypeSelector';
-import { GarmentPromptInput } from '../components/GarmentPromptInput';
-import { GarmentStylesGrid } from '../components/GarmentStylesGrid';
-import { aiGarmentCreateStyles as styles } from '../styles/screens';
-import { useGarmentStyles } from '../hooks/useGarmentStyles';
-import { useGarmentRequest } from '../hooks/useGarmentRequest';
+import { MockupTypeSelector } from '../components/MockupTypeSelector';
+import { MockupPromptInput } from '../components/MockupPromptInput';
+import { MockupStylesGrid } from '../components/MockupStylesGrid';
+import { aiMockupCreateStyles as styles } from '../styles/screens';
+import { useMockupStyles } from '../hooks/useMockupStyles';
+import { useMockupRequest } from '../hooks/useMockupRequest';
 
 type RootStackParamList = {
-  AIGarment: undefined;
-  AIGarmentStyles: undefined;
+  AIMockup: undefined;
+  AIMockupStyles: undefined;
 };
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'AIGarment'>;
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'AIMockup'>;
 
-const AIGarmentCreateScreen = () => {
+const AIMockupCreateScreen = () => {
   const navigation = useNavigation<NavigationProp>();
   const [selectedType, setSelectedType] = useState<'text' | 'image'>('text');
   const [prompt, setPrompt] = useState('');
   const [selectedStyle, setSelectedStyle] = useState<string | null>(null);
 
-  const { garmentStyles, isLoading: isLoadingStyles } = useGarmentStyles(4);
-  const { createRequest, isLoading: isCreating } = useGarmentRequest();
+  const { mockupStyles, isLoading: isLoadingStyles } = useMockupStyles(4);
+  const { createRequest, isLoading: isCreating } = useMockupRequest();
 
-  const handleCreateGarment = async () => {
+  const handleCreateMockup = async () => {
     const success = await createRequest({
       prompt,
       selectedStyle: selectedStyle!,
@@ -45,36 +45,36 @@ const AIGarmentCreateScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title="AI Garment" />
+      <Header title="AI Mockup" />
 
-      <GarmentTypeSelector
+      <MockupTypeSelector
         selectedType={selectedType}
         onTypeSelect={setSelectedType}
       />
 
-      <GarmentPromptInput
+      <MockupPromptInput
         value={prompt}
         onChangeText={setPrompt}
       />
 
-      <GarmentStylesGrid
-        styles={garmentStyles}
+      <MockupStylesGrid
+        styles={mockupStyles}
         selectedStyle={selectedStyle}
         onStyleSelect={setSelectedStyle}
-        onSeeAllPress={() => navigation.navigate('AIGarmentStyles')}
+        onSeeAllPress={() => navigation.navigate('AIMockupStyles')}
         isPreview
       />
 
       <GradientButton
         title={isLoading ? "Creating..." : "Create"}
         icon="✨"
-        colors={['#4169E1', '#1E90FF']}
+        colors={['#483D8B', '#6A5ACD']}
         style={styles.createButton}
-        onPress={handleCreateGarment}
+        onPress={handleCreateMockup}
         disabled={isLoading || !prompt || !selectedStyle}
       />
     </SafeAreaView>
   );
 };
 
-export default AIGarmentCreateScreen; 
+export default AIMockupCreateScreen; 

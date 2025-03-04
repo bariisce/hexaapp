@@ -27,4 +27,7 @@ export type RootStackParamList = {
   AIEmoji: undefined;
   AIEmojiCreate: undefined;
   AIEmojiStyles: undefined;
+  AIMockup: undefined;
+  AIMockupCreate: undefined;
+  AIMockupStyles: undefined;
 }; 
